@@ -19,3 +19,4 @@ spring:
 app:
   exchange:
     fanout: "orders.v1.order-created"
+    fanout-dead-letter: "orders.v1.order-created.dl"

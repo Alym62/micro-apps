@@ -15,7 +15,21 @@ spring:
     port: 5672
     username: guest
     password: guest
+    listener:
+      simple:
+        default-requeue-rejected: false
+
+
+# @TODO: Configuração para processar a mensagem novamente na mesma fila
+#        retry:
+#         enabled: true
+#          max-attempts: 3
+#          initial-interval: 5s
+#         multiplier: 2
 
 app:
   queue: "orders.v1.order-created-cashback"
+  queue-dead-letter: "orders.v1.order-created-cashback.dl"
+  queue-parking-lot: "orders.v1.order-created-cashback.parking-lot"
   exchange: "orders.v1.order-created"
+  exchange-dead-letter: "orders.v1.order-created.dl"

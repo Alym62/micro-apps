@@ -1,0 +1,11 @@
+services:
+  rabbitmq:
+    image: rabbitmq:3.7.8-management
+    ports:
+      - 5672:5672
+      - 15672:15672
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASSWORD=guest
+    volumes:
+      - ./enabled_plugins:/etc/rabbitmq/enabled_plugins

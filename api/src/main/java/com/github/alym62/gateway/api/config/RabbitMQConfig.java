@@ -16,9 +16,17 @@ public class RabbitMQConfig {
     @Value("${app.exchange.fanout}")
     private String exchangeFanout;
 
+    @Value("${app.exchange.fanout-dead-letter}")
+    private String exchangeFanoutDeadLetter;
+
     @Bean
     public FanoutExchange fanoutExchange() {
         return new FanoutExchange(exchangeFanout);
+    }
+
+    @Bean
+    public FanoutExchange fanoutExchangeDeadLetter() {
+        return new FanoutExchange(exchangeFanoutDeadLetter);
     }
 
     @Bean
