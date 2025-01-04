@@ -9,8 +9,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.amqp.core.MessagePostProcessor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
@@ -42,7 +44,15 @@ public class OrderService {
                 .protocol(entity.getProtocol())
                 .createdAt(entity.getCreatedAt()).build();
 
-        rabbitTemplate.convertAndSend(exchangeFanout, "", payload);
+        final int priority = order.getPrice().compareTo(new BigDecimal("1000")) >= 0 ? 10 : 1;
+
+        final MessagePostProcessor messagePostProcessor = (message) -> {
+            var messageProperties = message.getMessageProperties();
+            messageProperties.setPriority(priority);
+            return message;
+        };
+
+        rabbitTemplate.convertAndSend(exchangeFanout, "", payload, messagePostProcessor);
 
         return order;
     }

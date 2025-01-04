@@ -38,6 +38,7 @@ public class RabbitMQConfig {
     public Queue queue() {
         Map<String, Object> arguments = new HashMap<>();
         arguments.put("x-dead-letter-exchange", exchangeDeadLetter);
+        arguments.put("x-max-priority", 10);
 
         return new Queue(queue, true, false, false, arguments);
     }
