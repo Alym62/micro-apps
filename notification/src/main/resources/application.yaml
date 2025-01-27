@@ -7,6 +7,18 @@ spring:
     port: 5672
     username: guest
     password: guest
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: 
+    password:
+    properties:
+      mail:
+        stmp:
+          auth: true 
+      smpt:
+        starttls:
+          enable: true
 
 app:
   queue: "orders.v1.order-created-notification"
