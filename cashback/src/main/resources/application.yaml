@@ -13,8 +13,8 @@ spring:
   rabbitmq:
     host: localhost
     port: 5672
-    username: cashback-service
-    password: 123
+    username: guest
+    password: guest
     listener:
       simple:
         default-requeue-rejected: false

@@ -17,7 +17,7 @@ public class OrderCreatedListener {
 
     @RabbitListener(queues = "${app.queue}")
     public void onOrderCreated(EventOrderCreated event) {
-        var sendEmail = emailService.sendEmailOfNotification(null, null, null);
-        log.info(sendEmail);
+        emailService.sendEmailOfNotification(event.email(), "Pedido criado #" + event.protocol(),
+                "Pedido feito com sucesso! Parabéns por ter comprado no nosso site");
     }
 }

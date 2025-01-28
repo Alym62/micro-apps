@@ -15,18 +15,17 @@ public class EmailService {
     @Value("${spring.mail.username}")
     private String from;
 
-    public String sendEmailOfNotification(String destination, String text, String message) {
+    public void sendEmailOfNotification(String to, String subject, String body) {
         try {
             SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
             simpleMailMessage.setFrom(from);
-            simpleMailMessage.setTo(destination);
-            simpleMailMessage.setSubject(text);
-            simpleMailMessage.setText(message);
+            simpleMailMessage.setTo(to);
+            simpleMailMessage.setSubject(subject);
+            simpleMailMessage.setText(body);
 
             emailSender.send(simpleMailMessage);
-            return "Email enviado com sucesso";
         } catch (Exception ex) {
-            return "Erro ao tentar enviar email";
+            ex.getCause();
         }
     }
 }

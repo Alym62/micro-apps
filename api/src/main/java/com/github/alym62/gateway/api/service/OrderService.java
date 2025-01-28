@@ -1,20 +1,22 @@
 package com.github.alym62.gateway.api.service;
 
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.UUID;
+
+import org.springframework.amqp.core.MessagePostProcessor;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
 import com.github.alym62.gateway.api.entity.Order;
 import com.github.alym62.gateway.api.exceptions.BusinessException;
 import com.github.alym62.gateway.api.payload.EventOrderCreated;
 import com.github.alym62.gateway.api.repository.OrderRepository;
+
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.amqp.core.MessagePostProcessor;
-import org.springframework.stereotype.Service;
-
-import java.math.BigDecimal;
-import java.util.List;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -41,6 +43,7 @@ public class OrderService {
                 .status(entity.getStatus())
                 .price(entity.getPrice())
                 .description(entity.getDescription())
+                .email(entity.getEmail())
                 .protocol(entity.getProtocol())
                 .createdAt(entity.getCreatedAt()).build();
 
