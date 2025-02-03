@@ -8,10 +8,10 @@ spring:
     username: guest
     password: guest
   mail:
-    host: ${EMAIL_HOST}
-    port: ${EMAIL_PORT}
-    username: ${EMAIL_USERNAME}
-    password: ${EMAIL_PASSWORD}
+    host: sandbox.smtp.mailtrap.io
+    port: 2525
+    username: 980250113360d9
+    password: b19a4bf1090a47
     properties:
       mail:
         stmp:
